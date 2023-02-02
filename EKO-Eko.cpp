@@ -1,10 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
+// overall time complexity : O(nlogn)
+
 // function to check whether mid is a possible solution or not
 bool isPossible(int arr[], int N, int mid, int M)
 {
     int sum = 0;
     // traverse the array
+    // time complexity : O(n)
     for (int i = 0; i < N; i++)
     {
         // if height of tree is greater than height of sawblade then only it is possible to cut the tree and add that height i.e arr[i]-mid into sum
@@ -35,17 +38,18 @@ int main()
     {
         cin >> arr[i];
     }
-    // initialise start = 1 as reuired wood amount is atleast one and end=2*pow(10,9) i.e max amount of wood he takes
-    int s = 1, e = 2e9;
+    // initialise start = 0 as min sawblade height possibe is zero  and end = maxelement of arr i.e max sawblade height possible
+    int s = 0, e = *max_element(arr, arr + N);
     int ans = -1;
-    // appling binary search
+    // appling binary search as answer have a range i.e s to e
+    // time complexity : O(logn)
     while (s <= e)
     {
         int mid = s + (e - s) / 2;
         // check if he get the required amount of wood i.e M or not by setting the sawblade at mid height
         if (isPossible(arr, N, mid, M))
         {
-            // if yes maybe it is a valid ans and he increase the height as ATQ we have to find the max sawblade height possible
+            // if yes maybe it is a possible result , store this and increase the height as ATQ we have to find the max sawblade height possible
             ans = mid;
             s = mid + 1;
         }
